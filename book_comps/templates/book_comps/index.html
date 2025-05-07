@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comparative Title Search</title>
+    </head>
+    <body>
+        <h1>Comp Search</h1>
+            <form action="index.html/" method="post">
+                {% csrf_token %}
+                <div class="comp_search">
+                <label for="key_word">Key Word: </label><br>
+                <input id="key_word" type="text" name="key_word"><br>
+                <label for="genre">Enter Genre:</label><br>
+                <input type="text" id="genre" name="genre"><br>
+                <button type="submit">Search</button>
+            </div>
+            </form>
+            {{ table|safe }}
+    </body>
+</html>
