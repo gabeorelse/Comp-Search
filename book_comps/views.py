@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 from django.http import HttpResponse
 from .forms import KeyForm
+import pandas as pd
 
 def index(request):
     return render(request, 'book_comps/index.html')
@@ -22,8 +23,10 @@ def search_books(request):
     
             for book in results['items']:
                 rows.append({'publishedDate': book['volumeInfo']['publishedDate'], 'title': book['volumeInfo']['title']})
+            
+            df = pd.DataFrame(rows)
+            context = df.to_html()
+            with open("book_comps/search_books.html", "w", encoding="utf-8") as text_file:
+                text_file.write(context)
 
-            return render(request, 'book_comps/index.html', {'table': rows})
-
-
-#search_books()
+            return render(request, 'book_comps/search_books.html', {'table': context})
