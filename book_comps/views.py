@@ -19,10 +19,12 @@ def search_books(request):
 
             results = res.json()
 
+            #print(results)
+
             rows = []
     
             for book in results['items']:
-                rows.append({'publishedDate': book['volumeInfo']['publishedDate'], 'title': book['volumeInfo']['title']})
+                rows.append({'publishedDate': book['volumeInfo']['publishedDate'], 'title': book['volumeInfo']['title'], 'authors': book['volumeInfo']['authors']})
             
             df = pd.DataFrame(rows)
             context = df.to_html()
